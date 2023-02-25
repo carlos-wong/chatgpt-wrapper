@@ -20,7 +20,7 @@ RENDER_MODELS = {
     "legacy-free": "text-davinci-002-render"
 }
 
-def extract_usefull_json_key_from_str_by_regex(s):
+def extract_useful_json_key_from_str_by_regex(s):
     # Define a regex pattern that matches invalid control characters
     match = re.search(r'\s*"current_node"\s*:\s*"([a-zA-Z0-9-]+)"\s*', s)
     if match:
@@ -126,7 +126,7 @@ class ChatGPT:
                 f"div#{conversation_div_id}"
             )
             if len(conversation_info_datas) > 0:
-                conversation_info_after_filter = extract_usefull_json_key_from_str_by_regex(conversation_info_datas[0].inner_text())
+                conversation_info_after_filter = extract_useful_json_key_from_str_by_regex(conversation_info_datas[0].inner_text())
                 try:
                     conversation_info = json.loads(conversation_info_after_filter)
                     break
