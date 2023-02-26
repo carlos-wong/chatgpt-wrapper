@@ -21,7 +21,6 @@ RENDER_MODELS = {
 }
 
 def extract_useful_json_key_from_str_by_regex(s):
-    # Define a regex pattern that matches invalid control characters
     match = re.search(r'\s*"current_node"\s*:\s*"([a-zA-Z0-9-]+)"\s*', s)
     if match:
         current_node_value = match.group(1)
