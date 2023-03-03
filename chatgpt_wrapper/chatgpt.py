@@ -124,6 +124,7 @@ class ChatGPT:
         )
         self.page.evaluate(code)
         conversation_info = None
+        start_time = time.time()
         while True:
 
             conversation_info_datas = self.page.query_selector_all(
@@ -138,6 +139,9 @@ class ChatGPT:
                     print("{0}".format(conversation_info_after_filter))
                     print("load conversation info JSONDecodeError:", e)
             sleep(0.2)
+            if time.time() - start_time > 10:
+                return {}
+
         self.page.evaluate(f"document.getElementById('{conversation_div_id}').remove()")
         return conversation_info
 
