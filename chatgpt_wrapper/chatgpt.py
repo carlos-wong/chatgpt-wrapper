@@ -78,9 +78,14 @@ class ChatGPT:
         atexit.register(self._cleanup)
 
     def switch_to_conversation(self, conversation_id: str):
-        self.conversation_id = conversation_id
         conversation_info = self.get_conversation_info(conversation_id)
-        self.parent_message_id = conversation_info["current_node"]
+        if "current_node" in conversation_info:
+            self.parent_message_id = conversation_info["current_node"]
+            self.conversation_id = conversation_id
+            return (True)
+        else:
+            return (False,"Fetch conversation info failed")
+            
 
     def get_conversation_info(self, conversation_id: str):
         if self.session is None:
